@@ -1,0 +1,10 @@
+.search__search-bar {
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 7rem;
+}
+
+.search__text {
+    text-align: center;
+}

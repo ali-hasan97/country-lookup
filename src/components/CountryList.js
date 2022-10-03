@@ -1,3 +1,5 @@
+import './countryList.css'
+
 const CountryList = ({
   name,
   setSearch,
@@ -6,7 +8,6 @@ const CountryList = ({
 
   return (
     <tr>
-      <td>{name}</td>
       <td>
         <button
           id={name}
@@ -14,7 +15,7 @@ const CountryList = ({
           country={country}
           onClick={() => {setSearch(country.name.common.toLowerCase())}}
         >
-          show
+          {name}
         </button>
       </td>
     </tr>

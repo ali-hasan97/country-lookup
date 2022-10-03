@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import './search.css'
+import './countryList.css'
 import SingleView from "./SingleView";
 import CountryList from "./CountryList";
 
@@ -9,8 +10,8 @@ const Search = ({ countries }) => {
   const filtered = countries.filter((country) => country.name.common.toLowerCase().includes(search));
 
   return (
-    <div>
-      <div>
+    <div className="search">
+      <div className="search__search-bar">
         Search:
         <input
           onChange={(event) => {
@@ -19,7 +20,7 @@ const Search = ({ countries }) => {
           value={search}
         />
       </div>
-      <h1>Search a Country</h1>
+      <h1 className="search__text">Search a Country</h1>
       <DisplayMethod filtered={filtered} search={search} setSearch={setSearch} />
     </div>
   );
@@ -30,7 +31,7 @@ const DisplayMethod = ({ filtered, search, setSearch }) => {
     return <SingleView country={filtered[0]} />
   } else if (filtered.length < 20 && filtered.length > 1) {
     return (
-      <table>
+      <table className="countryList">
       <tbody>
         {filtered.slice(0, 20).map((country) => {
         return (
@@ -45,9 +46,9 @@ const DisplayMethod = ({ filtered, search, setSearch }) => {
       </table>
     );
   } else if (filtered.length === 0) {
-    return <h2>No matches found!</h2>
+    return <h2 className="search__text">No matches found...</h2>
   } else {
-    return <h2>Be more specific!</h2>;
+    return <h2 className="search__text">Be specific!</h2>;
   }
 };
 

@@ -1,0 +1,12 @@
+.countryList {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+
+.countryList button {
+    background-color: rgb(203, 132, 218);
+    border-radius: 10px;
+    font-size: large;
+    width: 400px; /* longest name: Saint Helena, Ascension and Tristan da Cunha */
+}
