@@ -4,7 +4,6 @@ import './singleView.css'
 
 const SingleView = ({ country }) => {
   const [countryWeather, setCountryWeather] = useState(null);
-  console.log('singleView', country)
   
   useEffect(() => {
     axios
@@ -49,7 +48,6 @@ const SingleView = ({ country }) => {
               <h2>Weather in {country.capital}</h2>
               Current temperature: {countryWeather.main.temp.toFixed(0)} &deg;F
               <br />
-              {console.log('icon', countryWeather.weather[0].icon)}
               <img
                 alt='weather icon'
                 src={`https://openweathermap.org/img/wn/${countryWeather.weather[0].icon}@4x.png`}

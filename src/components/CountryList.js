@@ -1,11 +1,10 @@
 import './countryList.css'
-
 const CountryList = ({
   name,
-  setSearch,
   country,
+  setCountryClicked,
+  setSelectedCountry,
 }) => {
-
   return (
     <tr>
       <td>
@@ -13,12 +12,16 @@ const CountryList = ({
           id={name}
           key={name}
           country={country}
-          onClick={() => {setSearch(country.name.common.toLowerCase())}}
+          onClick={() => {
+              setCountryClicked(true)
+              setSelectedCountry({name})
+          }}
         >
           {name}
         </button>
       </td>
     </tr>
+
   );
 };
 
