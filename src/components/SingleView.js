@@ -6,17 +6,29 @@ const SingleView = ({ country }) => {
   const [countryWeather, setCountryWeather] = useState(null);
   
   useEffect(() => {
-    axios
+    // fails when country doesn't have latlng in capitalinfo. So axios request not failing, country.capitalInfo.latlng[x] is failing. Fixed with if statement. Gets country latlng instead if capital missing
+    if (country.capitalInfo.latlng) {
+      console.log(country.capitalInfo)
+      axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${country.capitalInfo.latlng[0]}&lon=${country.capitalInfo.latlng[1]}&appid=${process.env.REACT_APP_API_KEY}&units=imperial`
       )
       .then((response) => {
-        setCountryWeather(response.data);
-      });
+        setCountryWeather(response.data)
+      })
+    } else {
+      console.log('capital info missing')
+      axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${country.latlng[0]}&lon=${country.latlng[1]}&appid=${process.env.REACT_APP_API_KEY}&units=imperial`
+      )
+      .then((response) => {
+        setCountryWeather(response.data)
+      })
+    }
   }, []);
 
   const render = () => {
-    <h1>hi</h1>
     if (countryWeather) {
       return (
         <div className="singleView">
@@ -25,7 +37,7 @@ const SingleView = ({ country }) => {
             <div className="singleView__container--info">
               <h2>General Information</h2>
               <p>
-                Capital: {country.capital}
+                Capital: {country.capital || 'None'}
                 <br />
                 Area: {country.area}
               </p>
@@ -45,7 +57,7 @@ const SingleView = ({ country }) => {
               />
             </div>
             <div className="singleView__container--weather">
-              <h2>Weather in {country.capital}</h2>
+              <h2>Weather in {country.capital || country.name.common}</h2>
               Current temperature: {countryWeather.main.temp.toFixed(0)} &deg;F
               <br />
               <img
